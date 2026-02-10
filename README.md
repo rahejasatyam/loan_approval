@@ -89,6 +89,270 @@ Using two models provides several benefits:
 | Models | Random Forest |
 
 ---
-
 ## 📂 Project Structure
+
+loan_approval/
+│
+├── models/
+│ ├── stage_1_rf_classifier_pipeline.pkl
+│ └── stage_2_rf_regression_pipeline.pkl
+│
+├── loan_approval_app.py
+├── main.py
+├── README.md
+└── loan_approval_dataset.csv
+
+
+
+---
+
+## 📁 Folder Explanation
+
+- models/  
+  Contains trained machine learning models.
+
+- stage_1_rf_classifier_pipeline.pkl  
+  Classifier model for approval prediction.
+
+- stage_2_rf_regression_pipeline.pkl  
+  Regression model for loan amount prediction.
+
+- loan_approval_app.py / main.py  
+  Main application files.
+
+- README.md  
+  Project documentation.
+
+- loan_approval_dataset.csv  
+  Dataset used for training.
+
+---
+
+## 📥 Input Features
+
+The system uses the following applicant details:
+
+| Feature | Description |
+|---------|-------------|
+| no_of_dependents | Number of dependents |
+| education | Graduate / Not Graduate |
+| self_employed | Yes / No |
+| income_annum | Annual income |
+| loan_amount | Requested loan amount |
+| loan_term | Loan duration |
+| cibil_score | Credit score |
+| residential_assets_value | Property value |
+| commercial_assets_value | Business assets |
+| luxury_assets_value | Luxury assets |
+| bank_asset_value | Bank savings |
+
+These features help measure the applicant’s financial stability.
+
+---
+
+## ▶️ Application Workflow
+
+The system follows these steps:
+
+1. User enters applicant details.
+2. Data is converted into a Pandas DataFrame.
+3. Stage 1 predicts approval or rejection.
+4. If approved, Stage 2 predicts loan amount.
+5. Result is displayed on the screen.
+
+---
+
+## 💻 Complete Implementation
+
+```python
+import joblib
+import os
+import pandas as pd
+
+
+class LoanApprovalApp:
+
+    def __init__(
+        self,
+        classifier="stage_1_rf_classifier_pipeline.pkl",
+        regressor="stage_2_rf_regression_pipeline.pkl"
+    ):
+
+        model_path = os.path.join(os.getcwd(), "models")
+
+        self.clf = joblib.load(
+            os.path.join(model_path, classifier)
+        )
+
+        self.reg = joblib.load(
+            os.path.join(model_path, regressor)
+        )
+
+        self.cols = [
+            "no_of_dependents",
+            "education",
+            "self_employed",
+            "income_annum",
+            "loan_amount",
+            "loan_term",
+            "cibil_score",
+            "residential_assets_value",
+            "commercial_assets_value",
+            "luxury_assets_value",
+            "bank_asset_value"
+        ]
+
+
+    def get_user_input(self):
+
+        print("\n--- Enter Applicant Details ---\n")
+
+        data = {
+            "no_of_dependents": 3,
+            "education": "Graduate",
+            "self_employed": "Yes",
+            "income_annum": 8300000,
+            "loan_amount": 3001400000,
+            "loan_term": 60,
+            "cibil_score": 4,
+            "residential_assets_value": 1000000,
+            "commercial_assets_value": 1600000,
+            "luxury_assets_value": 17200000,
+            "bank_asset_value": 6100000
+        }
+
+        return pd.DataFrame([data])
+
+
+    def two_stage_predict(self, applicant_df):
+
+        output = {}
+
+        applicant_df = applicant_df[self.clf.feature_names_in_]
+
+        approve = self.clf.predict(applicant_df)[0]
+
+        output["approve"] = int(approve)
+
+        if approve == 1:
+
+            applicant_df_reg = applicant_df.copy()
+
+            applicant_df_reg["loan_status"] = "Approve"
+
+            prediction = self.reg.predict(applicant_df_reg)[0]
+
+            output["regression_prediction"] = float(prediction)
+
+        else:
+
+            output["regression_prediction"] = None
+
+        return output
+
+
+    def run(self):
+
+        print("\n============================")
+        print("  Loan Approval Application ")
+        print("============================\n")
+
+        applicant_df = self.get_user_input()
+
+        result = self.two_stage_predict(applicant_df)
+
+        print("\n------ RESULT ------")
+
+        if result["approve"] == 1:
+
+            print("Loan Status : APPROVED")
+
+            print(
+                f"Predicted Loan Amount / Value : "
+                f"{result['regression_prediction']:.2f}"
+            )
+
+        else:
+
+            print("Loan Status : REJECTED")
+
+        print("\n---------------------\n")
+
+        return result
+
+
+if __name__ == "__main__":
+
+    app = LoanApprovalApp()
+
+    app.run()
+```
+How to Run the Project
+1️⃣ Install Dependencies
+pip install pandas scikit-learn joblib
+
+2️⃣ Setup Models
+
+Place trained models inside the models folder:
+
+models/
+ ├── stage_1_rf_classifier_pipeline.pkl
+ └── stage_2_rf_regression_pipeline.pkl
+
+3️⃣ Run the Program
+python loan_approval_app.py
+
+
+or
+
+python main.py
+
+📊 Sample Output
+Approved Case
+Loan Status : APPROVED
+Predicted Loan Amount / Value : 2450000.50
+
+Rejected Case
+Loan Status : REJECTED
+
+🔍 Real-World Use Cases
+
+Banking systems
+
+Credit scoring platforms
+
+Loan management software
+
+FinTech applications
+
+Financial decision systems
+
+📈 Future Enhancements
+
+REST API using FastAPI or Flask
+
+Web interface
+
+Model explainability
+
+Database integration
+
+Cloud deployment
+
+Security features
+
+📚 Learning Outcomes
+
+Machine learning pipelines
+
+Classification and regression
+
+Model deployment
+
+Production-level Python
+
+Financial ML systems
+
+Data leakage prevention
+
 
