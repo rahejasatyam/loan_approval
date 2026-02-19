@@ -1,6 +1,6 @@
 # 📌 Two-Stage Loan Approval System
 
-## 📖 Introduction
+##  Introduction
 
 The Two-Stage Loan Approval System is a machine learning–based application that helps banks and financial institutions make better loan decisions. It works in two steps:
 
@@ -13,7 +13,7 @@ This project is suitable for beginners who want to understand how machine learni
 
 ---
 
-## 🎯 Project Objective
+##  Project Objective
 
 The main objectives of this project are:
 
@@ -25,13 +25,13 @@ The main objectives of this project are:
 
 ---
 
-## 🧠 System Overview (Two-Stage Pipeline)
+##  System Overview (Two-Stage Pipeline)
 
 This project uses two separate machine learning models.
 
 ---
 
-### ✅ Stage 1: Loan Approval (Classification)
+###  Stage 1: Loan Approval (Classification)
 
 In the first stage, a Random Forest Classifier predicts whether the applicant should get a loan.
 
@@ -43,7 +43,7 @@ This stage analyzes the applicant’s financial and personal information.
 
 ---
 
-### 💰 Stage 2: Loan Amount Prediction (Regression)
+###  Stage 2: Loan Amount Prediction (Regression)
 
 If the applicant is approved in Stage 1, the system moves to Stage 2.
 
@@ -53,7 +53,7 @@ This stage runs only when the loan is approved. If rejected, no amount is predic
 
 ---
 
-### 📌 Why Two Stages?
+###  Why Two Stages?
 
 Using two models provides several benefits:
 
@@ -65,7 +65,7 @@ Using two models provides several benefits:
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
 - Two-stage machine learning pipeline
 - Classification + Regression approach
@@ -78,7 +78,7 @@ Using two models provides several benefits:
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Category | Tools / Libraries |
 |----------|------------------|
@@ -89,7 +89,7 @@ Using two models provides several benefits:
 | Models | Random Forest |
 
 ---
-## 📂 Project Structure
+##  Project Structure
 
 loan_approval/
 │
@@ -106,7 +106,7 @@ loan_approval/
 
 ---
 
-## 📁 Folder Explanation
+##  Folder Explanation
 
 - models/  
   Contains trained machine learning models.
@@ -128,7 +128,7 @@ loan_approval/
 
 ---
 
-## 📥 Input Features
+##  Input Features
 
 The system uses the following applicant details:
 
@@ -150,7 +150,7 @@ These features help measure the applicant’s financial stability.
 
 ---
 
-## ▶️ Application Workflow
+##  Application Workflow
 
 The system follows these steps:
 
@@ -162,7 +162,7 @@ The system follows these steps:
 
 ---
 
-## 💻 Complete Implementation
+##  Complete Implementation
 
 ```python
 import joblib
@@ -288,10 +288,10 @@ if __name__ == "__main__":
     app.run()
 ```
 How to Run the Project
-1️⃣ Install Dependencies
+1️ Install Dependencies
 pip install pandas scikit-learn joblib
 
-2️⃣ Setup Models
+2️ Setup Models
 
 Place trained models inside the models folder:
 
@@ -299,7 +299,7 @@ models/
  ├── stage_1_rf_classifier_pipeline.pkl
  └── stage_2_rf_regression_pipeline.pkl
 
-3️⃣ Run the Program
+3️ Run the Program
 python loan_approval_app.py
 
 
@@ -307,7 +307,7 @@ or
 
 python main.py
 
-📊 Sample Output
+ Sample Output
 Approved Case
 Loan Status : APPROVED
 Predicted Loan Amount / Value : 2450000.50
@@ -315,7 +315,7 @@ Predicted Loan Amount / Value : 2450000.50
 Rejected Case
 Loan Status : REJECTED
 
-🔍 Real-World Use Cases
+ Real-World Use Cases
 
 Banking systems
 
@@ -327,7 +327,7 @@ FinTech applications
 
 Financial decision systems
 
-📈 Future Enhancements
+ Future Enhancements
 
 REST API using FastAPI or Flask
 
@@ -341,7 +341,7 @@ Cloud deployment
 
 Security features
 
-📚 Learning Outcomes
+Learning Outcomes
 
 Machine learning pipelines
 
